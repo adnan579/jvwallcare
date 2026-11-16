@@ -80,9 +80,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({
   };
 
   return (
-    <div className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 py-12 lg:py-16 transition-colors">
+    <div className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 py-10 sm:py-12 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* Left 5 Columns: Official Contact & Plant Details */}
           <div className="lg:col-span-5 space-y-6">
             <div className="space-y-2">
@@ -91,7 +91,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                 <span aria-hidden="true">·</span>
                 <span>Pin: 221303</span>
               </div>
-              <h1 className="font-display text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              <h1 className="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 Contact {COMPANY_INFO.name}
               </h1>
               <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -100,7 +100,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               </p>
             </div>
 
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-5">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 space-y-5 shadow-2xs">
               <div className="flex items-start gap-3.5">
                 <div className="w-9 h-9 rounded-lg bg-teal-50 dark:bg-teal-950 border border-teal-100 dark:border-teal-800 flex items-center justify-center shrink-0">
                   <Building2 className="w-4 h-4 text-[#06686B] dark:text-teal-400" />

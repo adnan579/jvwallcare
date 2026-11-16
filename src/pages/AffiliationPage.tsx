@@ -69,8 +69,8 @@ export const AffiliationPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 py-12 lg:py-16 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-12">
+    <div className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 py-10 sm:py-12 lg:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-10 sm:space-y-12">
         {/* Page Header & 3 Affiliation Tiers */}
         <div className="space-y-6">
           <div className="max-w-3xl space-y-3">
@@ -78,7 +78,7 @@ export const AffiliationPage: React.FC = () => {
               <Handshake className="w-4 h-4" />
               <span>Authorized Trade Network · J.V. Wall Care Udyog</span>
             </div>
-            <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            <h1 className="font-display text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Dealership &amp; District Stockist Affiliation Program
             </h1>
             <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -89,7 +89,7 @@ export const AffiliationPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
             {[
               {
                 tier: 'Authorized Retail Dealer',
@@ -126,7 +126,7 @@ export const AffiliationPage: React.FC = () => {
               return (
                 <div
                   key={i}
-                  className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-4"
+                  className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 border-t-2 border-t-[#06686B] rounded-2xl p-5 sm:p-6 space-y-4 shadow-2xs"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono-tabular font-semibold text-orange-600 dark:text-orange-400">

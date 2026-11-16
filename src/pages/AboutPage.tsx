@@ -23,11 +23,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({
   onNavigateContact,
 }) => {
   return (
-    <div className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors">
+    <div className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
       {/* Hero Banner */}
-      <section className="py-14 lg:py-18 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950">
+      <section className="py-10 sm:py-14 lg:py-18 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             <div className="lg:col-span-7 space-y-5">
               <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-[#06686B] dark:text-teal-400">
                 <span>About {COMPANY_INFO.name}</span>
@@ -36,23 +36,23 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               </div>
 
               <h1
-                className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight"
+                className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight"
                 style={{ textWrap: 'balance' }}
               >
                 Manufacturing Excellence in White Cement &amp; Polymer Wall Putty from Bhadohi, U.P.
               </h1>
 
-              <div className="flex items-baseline gap-3 pt-1">
-                <span className="text-2xl font-bold text-orange-600 dark:text-orange-400">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 border-l-4 border-l-orange-600 flex flex-wrap items-baseline gap-2.5">
+                <span className="text-xl sm:text-2xl font-extrabold text-orange-600 dark:text-orange-400">
                   {COMPANY_INFO.hindiName}
                 </span>
                 <span className="text-slate-400">—</span>
-                <span className="text-lg font-semibold text-slate-800 dark:text-slate-200">
+                <span className="text-base sm:text-lg font-bold text-[#0B3B68] dark:text-teal-300">
                   {COMPANY_INFO.hindiTagline}
                 </span>
               </div>
 
-              <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
                 Headquartered at{' '}
                 <strong className="text-slate-900 dark:text-white">{COMPANY_INFO.address}</strong>,{' '}
                 <strong>{COMPANY_INFO.name}</strong> is an ISO 9001:2015 certified Indian
@@ -60,11 +60,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                 waterproof wall putty for residential and commercial architecture.
               </p>
 
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 pt-2">
                 <button
                   type="button"
                   onClick={onNavigateCatalog}
-                  className="inline-flex items-center gap-2 px-5 py-3 text-xs sm:text-sm font-semibold text-white bg-[#06686B] hover:bg-[#055255] dark:bg-teal-600 dark:hover:bg-teal-500 rounded-lg transition-colors cursor-pointer"
+                  className="min-h-[48px] inline-flex items-center justify-center gap-2 px-5 py-3 text-xs sm:text-sm font-semibold text-white bg-[#06686B] hover:bg-[#055255] dark:bg-teal-600 dark:hover:bg-teal-500 rounded-xl cursor-pointer"
                 >
                   <span>View 40 kg Wall Putty Catalog</span>
                   <ArrowRight className="w-4 h-4" />
@@ -72,7 +72,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                 <button
                   type="button"
                   onClick={onNavigateAffiliation}
-                  className="inline-flex items-center gap-2 px-5 py-3 text-xs sm:text-sm font-semibold text-slate-800 dark:text-white bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors cursor-pointer"
+                  className="min-h-[48px] inline-flex items-center justify-center gap-2 px-5 py-3 text-xs sm:text-sm font-semibold text-slate-800 dark:text-white bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl cursor-pointer"
                 >
                   <span>Become an Affiliated Dealer</span>
                 </button>
@@ -80,7 +80,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             </div>
 
             {/* Right Column: Official Promotional Poster Card */}
-            <div className="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-4">
+            <div className="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xs">
               <div className="h-80 rounded-xl bg-slate-100 dark:bg-slate-800 overflow-hidden flex items-center justify-center p-2">
                 <img
                   src={BRAND_ASSETS.promotionalPoster}
