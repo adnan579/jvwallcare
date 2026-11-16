@@ -1,0 +1,6 @@
+{
+  "name": "J.V. Wall Care Udyog",
+  "description": "Official website and B2B industrial catalog for J.V. Wall Care Udyog, Bhadohi, UP — manufacturers of J.V. Waterproof Wall Putty, tile adhesives, architectural coatings, bitumen mastic, and industrial mineral powders (dolomite, calcined dolomite, and quicklime).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
