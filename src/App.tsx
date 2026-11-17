@@ -2,15 +2,18 @@ import { useState, useEffect } from 'react';
 import { Navbar, PageRoute } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ProductModal } from './components/ProductModal';
+import { SeoHead } from './components/SeoHead';
 import { CatalogPage } from './pages/CatalogPage';
 import { AboutPage } from './pages/AboutPage';
 import { AffiliationPage } from './pages/AffiliationPage';
 import { ContactPage } from './pages/ContactPage';
+import { AdminPage } from './pages/AdminPage';
 import { CATALOG_PRODUCTS, WallPuttyProduct } from './data/products';
 
 function resolveInitialPage(): PageRoute {
   if (typeof window === 'undefined') return 'catalog';
   const path = window.location.pathname.toLowerCase();
+  if (path.includes('admin')) return 'admin';
   if (path.includes('about')) return 'about';
   if (path.includes('affiliation') || path.includes('dealer')) return 'affiliation';
   if (path.includes('contact')) return 'contact';
@@ -24,7 +27,7 @@ export default function App() {
   const [orderProduct, setOrderProduct] = useState<string>(CATALOG_PRODUCTS[0].name);
   const [orderQuantity, setOrderQuantity] = useState<string>('');
 
-  // Sync dark mode class on <html> and <body>
+  // Sync dark mode class on <html>
   useEffect(() => {
     const root = document.documentElement;
     if (isDark) {
@@ -60,6 +63,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col pb-16 md:pb-0 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+      <SeoHead activePage={activePage} />
+
       <Navbar
         activePage={activePage}
         onNavigate={handleNavigate}
@@ -91,6 +96,10 @@ export default function App() {
             preselectedProduct={orderProduct}
             preselectedQuantity={orderQuantity}
           />
+        )}
+
+        {activePage === 'admin' && (
+          <AdminPage onBackToSite={() => handleNavigate('catalog')} />
         )}
       </main>
 

@@ -39,7 +39,7 @@ export const AffiliationPage: React.FC = () => {
   const [applications, setApplications] = useState<LoggedAffiliation[]>([]);
   const [latestApp, setLatestApp] = useState<LoggedAffiliation | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const validation = validateDealershipAffiliation(formData);
     if (!validation.isValid) {
@@ -48,11 +48,34 @@ export const AffiliationPage: React.FC = () => {
     }
 
     setErrors({});
+    const affiliationId = `JV-DLR-${Math.floor(10000 + Math.random() * 90000)}`;
     const entry: LoggedAffiliation = {
       ...formData,
-      affiliationId: `JV-DLR-${Math.floor(10000 + Math.random() * 90000)}`,
+      affiliationId,
       submittedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
+
+    try {
+      await fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          referenceId: affiliationId,
+          inquiryType: 'DEALERSHIP_APPLICATION',
+          fullName: formData.proprietorName,
+          firmName: formData.firmName,
+          phone: formData.phone,
+          email: formData.email,
+          location: formData.districtAndState,
+          quantityOrTarget: formData.monthlyTargetBags,
+          godownAreaSqFt: formData.godownAreaSqFt,
+          affiliationTier: formData.affiliationTier,
+          message: formData.existingTradeExperience,
+        }),
+      });
+    } catch {
+      // Local state still logs application if offline
+    }
 
     setApplications((prev) => [entry, ...prev]);
     setLatestApp(entry);

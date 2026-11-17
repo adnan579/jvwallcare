@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { BRAND_ASSETS, COMPANY_INFO } from '../data/products';
 
-export type PageRoute = 'catalog' | 'about' | 'affiliation' | 'contact';
+export type PageRoute = 'catalog' | 'about' | 'affiliation' | 'contact' | 'admin';
 
 interface NavbarProps {
   activePage: PageRoute;

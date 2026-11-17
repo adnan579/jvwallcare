@@ -52,7 +52,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
     }
   }, [preselectedQuantity]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const validation = validateContactInquiry(formData);
     if (!validation.isValid) {
@@ -61,11 +61,32 @@ export const ContactPage: React.FC<ContactPageProps> = ({
     }
 
     setErrors({});
+    const referenceId = `JV-ORD-${Math.floor(100000 + Math.random() * 900000)}`;
     const entry: LoggedContactInquiry = {
       ...formData,
-      referenceId: `JV-ORD-${Math.floor(100000 + Math.random() * 900000)}`,
+      referenceId,
       submittedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
+
+    try {
+      await fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          referenceId,
+          inquiryType: 'ORDER_INQUIRY',
+          fullName: formData.fullName,
+          phone: formData.phone,
+          location: formData.cityOrDistrict,
+          buildingSegment: formData.buildingSegment,
+          selectedProduct: formData.selectedPuttyGrade,
+          quantityOrTarget: formData.bagsQuantity,
+          message: formData.message,
+        }),
+      });
+    } catch {
+      // Local state still logs inquiry if offline
+    }
 
     setSubmittedList((prev) => [entry, ...prev]);
     setLatestSuccess(entry);
