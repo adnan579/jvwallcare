@@ -183,7 +183,13 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onBackToSite }) => {
   useEffect(() => {
     let active = true;
     fetch('/api/admin/bootstrap-status')
-      .then((res) => res.json())
+      .then(async (res) => {
+        const contentType = res.headers.get('content-type') || '';
+        if (!res.ok || !contentType.includes('application/json')) {
+          throw new Error('Admin API endpoint returned an unexpected response.');
+        }
+        return res.json();
+      })
       .then((data) => {
         if (!active) return;
         setIsBootstrapped(Boolean(data.isBootstrapped));
@@ -191,7 +197,12 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onBackToSite }) => {
         setCloudinaryConfigured(Boolean(data.cloudinaryConfigured));
       })
       .catch(() => {
-        // Default to showing bootstrap form if offline
+        if (!active) return;
+        // Default safely to Sign In form (e.g., if ADMIN_EMAIL/ADMIN_PASSWORD are configured)
+        setIsBootstrapped(true);
+        setAuthError(
+          'Unable to verify server bootstrap status. Ensure /api serverless routes are active on your deployment.'
+        );
       })
       .finally(() => {
         if (active) setCheckingBootstrap(false);

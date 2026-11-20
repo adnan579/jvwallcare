@@ -6,15 +6,19 @@ export interface AuthRequest extends Request {
   user?: { uid: string; email: string; authMethod: 'env-or-bootstrap' };
 }
 
-function getSessionSecret(): string {
-  const val = (process.env.ADMIN_SESSION_SECRET || '').trim();
-  if (!val || val === 'MY_ADMIN_SESSION_SECRET' || val.startsWith('MY_')) {
-    return 'jv-wall-care-udyog-admin-secret-2026';
-  }
+function getCleanSecret(key: string): string {
+  const val = (process.env[key] || '').trim();
+  if (!val || val === `MY_${key}` || val.startsWith('MY_')) return '';
   return val;
 }
 
-const SESSION_SECRET = getSessionSecret();
+function getSessionSecret(): string {
+  return (
+    getCleanSecret('ADMIN_SESSION_SECRET') ||
+    getCleanSecret('ADMIN_PASSWORD') ||
+    'jv-wall-care-udyog-admin-secret-2026'
+  );
+}
 
 export function hashPassword(password: string): string {
   return crypto.createHash('sha256').update(`jv_salt:${password}`).digest('hex');
@@ -29,7 +33,10 @@ export function safeCompareStrings(a: string, b: string): boolean {
 export function createAdminSessionToken(email: string, uid = 'admin-bootstrap'): string {
   const exp = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
   const payload = Buffer.from(JSON.stringify({ uid, email, exp })).toString('base64url');
-  const sig = crypto.createHmac('sha256', SESSION_SECRET).update(payload).digest('base64url');
+  const sig = crypto
+    .createHmac('sha256', getSessionSecret())
+    .update(payload)
+    .digest('base64url');
   return `jvadmin.${payload}.${sig}`;
 }
 
@@ -41,7 +48,7 @@ export function verifyAdminSessionToken(
   if (parts.length !== 3) return null;
   const [, payload, sig] = parts;
   const expectedSig = crypto
-    .createHmac('sha256', SESSION_SECRET)
+    .createHmac('sha256', getSessionSecret())
     .update(payload)
     .digest('base64url');
   if (!safeCompareStrings(sig, expectedSig)) return null;
